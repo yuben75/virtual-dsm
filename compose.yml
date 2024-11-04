@@ -8,8 +8,14 @@ services:
             - /dev/kvm
         cap_add:
             - NET_ADMIN
-        ports:
-            - 5000:5000
+        networks:
+            vdsm:
+                ipv4_address: 192.168.1.81  # 為 DSM 容器指定 IP，調整為可用的 IP
+
         volumes:
             - /var/dsm:/storage
         stop_grace_period: 2m
+
+networks:
+    vdsm:
+        external: true

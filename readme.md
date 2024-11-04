@@ -47,6 +47,9 @@ Via Docker CLI:
 ```bash
 docker run -it --rm -p 5000:5000 --device=/dev/kvm --cap-add NET_ADMIN --stop-timeout 120 vdsm/virtual-dsm
 ```
+```bash
+docker exec -it dsm /bin/bash
+```
 
 Via Kubernetes:
 
@@ -179,6 +182,16 @@ kubectl apply -f kubernetes.yml
       --ip-range=192.168.0.100/28 \
       -o parent=eth0 vdsm
   ```
+  
+  ```bash
+sudo docker network create -d macvlan \
+    --subnet=192.168.1.0/24 \
+    --gateway=192.168.1.1 \
+    -o parent=enp1s0 vdsm
+
+  ```
+  
+  
   
   Be sure to modify these values to match your local subnet. 
 
